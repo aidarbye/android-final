@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
                 if (javaClass != AuthActivity::class.java) {
                     val intent = Intent(this, AuthActivity::class.java)
                     startActivity(intent)
-                    finish() // Закрываем текущую активность
+                    finish()
                 }
             }
         }
