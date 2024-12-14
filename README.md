@@ -20,3 +20,7 @@ The architecture will consist of Activation transitions, internal navigation bet
 - **Nurkin Aidar**
 - **Daniyar Anuar**
 
+## Credentials for test
+- **Email: audars@mail.ru**
+- **Password: 123123**
+
