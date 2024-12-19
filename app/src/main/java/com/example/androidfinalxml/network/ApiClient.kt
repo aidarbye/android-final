@@ -15,7 +15,7 @@ object ApiClient {
     }
 
     suspend fun getActivity(): ActivityModel {
-        val retrofit = Retrofit.Builder().baseUrl("https://www.boredapi.com/api/")
+        val retrofit = Retrofit.Builder().baseUrl("https://bored-api.appbrewery.com/")
             .addConverterFactory(GsonConverterFactory.create()).build()
         val service = retrofit.create(ActivityAPI::class.java)
         return service.getActivity()
