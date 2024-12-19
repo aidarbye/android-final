@@ -45,9 +45,5 @@ class JokeAdapter: RecyclerView.Adapter<JokeAdapter.JokeViewHolder>() {
                 binding.jokePunchline.text = joke.punchline
             }
         }
-
     }
-
-
-
 }

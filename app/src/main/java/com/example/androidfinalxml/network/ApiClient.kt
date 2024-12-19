@@ -1,6 +1,5 @@
 package com.example.androidfinalxml.network
 
-import com.example.androidfinalxml.models.ActivityModel
 import com.example.androidfinalxml.models.JokeModel
 import com.example.androidfinalxml.models.JokeAPI
 import retrofit2.Retrofit
@@ -12,13 +11,6 @@ object ApiClient {
             .addConverterFactory(GsonConverterFactory.create()).build()
         val service = retrofit.create(JokeAPI::class.java)
         return service.getData()
-    }
-
-    suspend fun getActivity(): ActivityModel {
-        val retrofit = Retrofit.Builder().baseUrl("https://bored-api.appbrewery.com/")
-            .addConverterFactory(GsonConverterFactory.create()).build()
-        val service = retrofit.create(ActivityAPI::class.java)
-        return service.getActivity()
     }
 
     suspend fun getRandomJoke(): JokeModel {
