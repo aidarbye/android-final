@@ -5,6 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.FirebaseAuthUserCollisionException
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.tasks.await
@@ -14,7 +17,7 @@ import kotlin.coroutines.resumeWithException
 
 class AuthViewModel : ViewModel() {
 
-    val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
+    private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
     private val _isLoggedIn = MutableLiveData<Boolean>()
     val isLoggedIn: LiveData<Boolean> get() = _isLoggedIn
@@ -35,15 +38,23 @@ class AuthViewModel : ViewModel() {
     suspend fun signInWithEmailAndPasswordSuspend(
         email: String,
         password: String
-    ): AuthResult =
-        suspendCancellableCoroutine { continuation ->
-            firebaseAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        continuation.resume(task.result)
-                    } else {
-                        continuation.resumeWithException(task.exception ?: Exception("Неизвестная ошибка"))
-                    }
-                }
+    ): AuthResult {
+        return try {
+            firebaseAuth.signInWithEmailAndPassword(email, password).await()
+        } catch (e: Exception) {
+            throw e
         }
+    }
+
+    suspend fun registerWithEmailAndPasswordSuspend(
+        email: String,
+        password: String
+    ): AuthResult {
+        return try {
+            firebaseAuth.createUserWithEmailAndPassword(email, password).await()
+        } catch (e: Exception) {
+            throw e
+        }
+    }
+
 }

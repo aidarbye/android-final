@@ -10,23 +10,26 @@
     <TextView
         android:id="@+id/jokeSetUp"
         android:layout_width="346dp"
-        android:layout_height="136dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:gravity="center"
         android:text="TextView"
         android:textSize="28sp"
+        android:padding="12dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.464"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
 
     <TextView
         android:id="@+id/jokePunchline"
         android:layout_width="344dp"
-        android:layout_height="26dp"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
         android:gravity="center"
-        android:text="TextView"
+        android:text="TextViewTextViewTextViewTextViewTextViewTextViewTextViewTextView"
         android:textSize="14sp"
         android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -34,7 +37,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/jokeSetUp"
         app:layout_constraintTop_toBottomOf="@+id/jokeSetUp"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="HardcodedText" />
 
     <View
         android:layout_width="match_parent"
@@ -45,4 +49,5 @@
         app:layout_constraintHorizontal_bias="0.47"
         app:layout_constraintStart_toStartOf="@+id/jokePunchline"
         app:layout_constraintTop_toBottomOf="@+id/jokePunchline" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
-package com.example.androidfinalxml.models
+package com.example.androidfinalxml.network
 
+import com.example.androidfinalxml.models.JokeModel
 import retrofit2.http.GET
 
 interface JokeAPI {

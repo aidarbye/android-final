@@ -19,10 +19,8 @@ class AuthActivity : AppCompatActivity() {
         binding = ActivityAuthBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Initialize the ViewPager2
         val viewPager = binding.viewPager
 
-        // Create the adapter and set it to ViewPager2
         val viewPagerAdapter = ViewPagerAdapter(this)
         viewPager.adapter = viewPagerAdapter
 
