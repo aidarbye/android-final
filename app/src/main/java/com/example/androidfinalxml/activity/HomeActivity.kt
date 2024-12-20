@@ -3,21 +3,22 @@ package com.example.androidfinalxml.activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.lifecycle.ViewModelProvider
-import androidx.viewpager.widget.ViewPager
-import com.example.androidfinalxml.R
-import com.example.androidfinalxml.viewmodel.AuthViewModel
 import com.example.androidfinalxml.adapters.TabPagerAdapter
-import com.google.android.material.tabs.TabLayout
+import com.example.androidfinalxml.databinding.ActivityHomeBinding
+import com.example.androidfinalxml.viewmodel.AuthViewModel
+import com.google.android.material.tabs.TabLayoutMediator
 
 class HomeActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityHomeBinding
     private lateinit var authViewModel: AuthViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+
+        binding = ActivityHomeBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         authViewModel = ViewModelProvider(this)[AuthViewModel::class.java]
 
@@ -27,12 +28,16 @@ class HomeActivity : AppCompatActivity() {
             finish()
         }
 
-        val viewPager: ViewPager = findViewById(R.id.viewPager)
-        val adapter = TabPagerAdapter(supportFragmentManager, FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT)
+        val adapter = TabPagerAdapter(this)
+        binding.viewPager.adapter = adapter
 
-        viewPager.adapter = adapter
-
-        val tabLayout: TabLayout = findViewById(R.id.tabLayout)
-        tabLayout.setupWithViewPager(viewPager)
+        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
+            tab.text = when (position) {
+                0 -> "Jokes"
+                1 -> "Random Joke"
+                2 -> "Profile"
+                else -> null
+            }
+        }.attach()
     }
 }

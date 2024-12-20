@@ -1,4 +1,4 @@
-package com.example.androidfinalxml.fragments
+package com.example.androidfinalxml.utils
 
 import androidx.recyclerview.widget.DiffUtil
 import com.example.androidfinalxml.models.JokeModel
