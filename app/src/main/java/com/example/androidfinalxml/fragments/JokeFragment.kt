@@ -15,13 +15,11 @@ class JokeFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: JokeViewModel by viewModels()
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentJokesBinding.inflate(inflater, container, false)
-
         return binding.root
     }
 
@@ -31,15 +29,28 @@ class JokeFragment : Fragment() {
         binding.jokeRV.adapter = adapter
         binding.jokeRV.layoutManager = LinearLayoutManager(requireContext())
 
-        viewModel.jokes.observe(viewLifecycleOwner){
-            adapter.setItems(it)
+        // Подписка на состояние загрузки
+        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
         }
-    }
 
-    override fun onResume() {
-        super.onResume()
+        // Подписка на шутки
+        viewModel.jokes.observe(viewLifecycleOwner) { jokes ->
+            if (jokes.isNotEmpty()) {
+                binding.jokeRV.visibility = View.VISIBLE
+                adapter.setItems(jokes)
+            } else {
+                binding.jokeRV.visibility = View.GONE
+            }
+        }
+
+        // Инициируем загрузку данных
         viewModel.getJokeList()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
 
