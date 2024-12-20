@@ -1,8 +1,8 @@
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.androidfinalxml.activity.AuthActivity
-import com.example.androidfinalxml.fragment.LoginFragment
-import com.example.androidfinalxml.fragment.RegisterFragment
+import com.example.androidfinalxml.fragments.LoginFragment
+import com.example.androidfinalxml.fragments.RegisterFragment
 
 class ViewPagerAdapter(fragment: AuthActivity) : FragmentStateAdapter(fragment) {
 
